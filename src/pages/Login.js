@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { loginEmail } from '../actions';
 
 class Login extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.handleChange = this.handleChange.bind(this);
     this.validateFields = this.validateFields.bind(this);
@@ -13,55 +14,62 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
+      logged: false,
     };
   }
 
   handleChange({ target: { value, name } }) {
-    this.setState({ [name]: value });
+    this.setState({
+      [name]: value,
+    });
   }
 
   validateFields() {
     const { email, password } = this.state;
-    const MIN_PASSWORD = 6;
+
+    const MIN_PASSWORD_CHARACTERS = 6;
 
     if (
       email.includes('@')
       && email.includes('.com')
-      && password.length >= MIN_PASSWORD
-    ) {
-      return false;
-    }
+      && password.length >= MIN_PASSWORD_CHARACTERS
+    ) return false;
+
     return true;
   }
 
   render() {
-    const { email, password } = this.state;
+    const { email, password, logged } = this.state;
     const { userEmail } = this.props;
     const { handleChange, validateFields } = this;
 
     return (
       <div>
-        <div className="titleLogin">
-          <h2>TrybeWallet</h2>
-        </div>
+        { logged && <Redirect to="/carteira" /> }
         <input
-          data-testid="email-input"
           type="email"
-          id="email"
+          data-testid="email-input"
+          name="email"
           value={ email }
           onChange={ handleChange }
         />
         <input
-          data-testid="password-input"
+          name="password"
           type="password"
-          id="password"
+          data-testid="password-input"
           value={ password }
           onChange={ handleChange }
         />
         <button
-          type="button"
+          type="submit"
           disabled={ validateFields() }
-          onClick={ () => userEmail(email) }
+          onClick={ (event) => {
+            event.preventDefault();
+            userEmail(email);
+            this.setState({
+              logged: true,
+            });
+          } }
         >
           Entrar
         </button>
