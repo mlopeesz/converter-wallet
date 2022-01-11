@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-class Header extends Component {
+class WalletHeader extends Component {
   render() {
     const { userEmail } = this.props;
 
@@ -22,7 +22,7 @@ class Header extends Component {
   }
 }
 
-Header.propTypes = {
+WalletHeader.propTypes = {
   userEmail: PropTypes.string.isRequired,
 };
 
@@ -30,4 +30,4 @@ const mapStateToProps = (state) => ({
   userEmail: state.user.email,
 });
 
-export default connect(mapStateToProps, null)(Header);
+export default connect(mapStateToProps, null)(WalletHeader);
