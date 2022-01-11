@@ -48,6 +48,7 @@ class Login extends React.Component {
         { logged && <Redirect to="/carteira" /> }
         <input
           type="email"
+          placeholder="E-mail"
           data-testid="email-input"
           name="email"
           value={ email }
@@ -55,6 +56,7 @@ class Login extends React.Component {
         />
         <input
           name="password"
+          placeholder="Senha"
           type="password"
           data-testid="password-input"
           value={ password }
