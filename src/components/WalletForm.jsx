@@ -92,9 +92,9 @@ class WalletForm extends Component {
             value={ method }
             onChange={ this.handleChange }
           >
-            <option value="dinheiro">Dinheiro</option>
-            <option value="cartão de crédito">Cartão de Crédito</option>
-            <option value="cartão de débito">Cartão de Débito</option>
+            <option value="Dinheiro">Dinheiro</option>
+            <option value="Cartão de Crédito">Cartão de Crédito</option>
+            <option value="Cartão de Débito">Cartão de Débito</option>
           </select>
         </label>
         <label htmlFor="tag-input">
@@ -105,11 +105,11 @@ class WalletForm extends Component {
             value={ tag }
             onChange={ this.handleChange }
           >
-            <option value="alimentação">Alimentação</option>
-            <option value="lazer">Lazer</option>
-            <option value="trabalho">Trabalho</option>
-            <option value="transporte">Transporte</option>
-            <option value="saúde">Saúde</option>
+            <option value="Alimentação">Alimentação</option>
+            <option value="Lazer">Lazer</option>
+            <option value="Trabalho">Trabalho</option>
+            <option value="Transporte">Transporte</option>
+            <option value="Saúde">Saúde</option>
           </select>
         </label>
         <button
