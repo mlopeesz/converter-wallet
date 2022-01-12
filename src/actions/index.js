@@ -6,6 +6,12 @@ export const loginEmail = (email) => ({
   email,
 });
 
+export const WALLET_USER = 'WALLET_USER';
+export const wallet = (payload) => ({
+  type: WALLET_USER,
+  payload,
+});
+
 export const WALLET_FETCH = 'WALLET_FETCH';
 export const walletFetch = (payload) => ({
   type: WALLET_FETCH,
