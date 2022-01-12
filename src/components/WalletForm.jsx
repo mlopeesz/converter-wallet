@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import getCurrency from '../services/apiCurrency';
+import { getCurrency, wallet } from '../actions/index';
 import apiAllCurrency from '../services/apiAllCurrency';
-import { wallet } from '../actions';
 
 class WalletForm extends Component {
   constructor() {
@@ -32,18 +31,19 @@ class WalletForm extends Component {
     this.setState({ exchangeRates: fetch });
   }
 
-  handleChange({ target: { value, name } }) {
-    this.setState({
-      [name]: value,
-    });
-  }
-
   handleAddButton() {
     const { setDispatch, setDispatchFetch } = this.props;
     const { currency } = this.state;
     setDispatch(this.state);
     setDispatchFetch(currency);
     this.setState((state) => ({ value: 0, id: state.id + 1 }));
+  }
+
+  handleChange({ target }) {
+    const { id, value } = target;
+    this.setState({
+      [id]: value,
+    });
   }
 
   render() {
@@ -123,14 +123,14 @@ class WalletForm extends Component {
   }
 }
 
-WalletForm.propTypes = {
-  setDispatch: PropTypes.func.isRequired,
-  setDispatchFetch: PropTypes.func.isRequired,
-};
-
 const mapDispatchToProps = (dispatch) => ({
   setDispatch: (value) => dispatch(wallet(value)),
   setDispatchFetch: (value) => dispatch(getCurrency(value)),
 });
+
+WalletForm.propTypes = {
+  setDispatch: PropTypes.func.isRequired,
+  setDispatchFetch: PropTypes.func.isRequired,
+};
 
 export default connect(null, mapDispatchToProps)(WalletForm);
