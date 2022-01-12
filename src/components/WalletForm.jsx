@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getCurrency, wallet } from '../actions/index';
+import { getCurrency, wallet } from '../actions';
 import apiAllCurrency from '../services/apiAllCurrency';
 
-class WalletForm extends Component {
+class WalletForm extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -51,11 +51,15 @@ class WalletForm extends Component {
     return (
       <form>
         <input
+          id="value"
+          placeholder="Valor"
           data-testid="value-input"
           value={ value }
           onChange={ this.handleChange }
         />
         <input
+          id="description"
+          placeholder="Descrição"
           data-testid="description-input"
           value={ description }
           onChange={ this.handleChange }
@@ -63,8 +67,8 @@ class WalletForm extends Component {
         <label htmlFor="currency">
           Moeda:
           <select
-            data-testid="currency-input"
             id="currency"
+            data-testid="currency-input"
             value={ currency }
             onChange={ this.handleChange }
           >
@@ -84,24 +88,24 @@ class WalletForm extends Component {
             <option data-testid="XRP" value="XRP">XRP</option>
           </select>
         </label>
-        <label htmlFor="method-input">
-          Método de Pagamento:
+        <label htmlFor="method">
+          Método De Pagamento:
           <select
+            id="method"
             data-testid="method-input"
-            id="method-input"
             value={ method }
             onChange={ this.handleChange }
           >
             <option value="Dinheiro">Dinheiro</option>
-            <option value="Cartão de Crédito">Cartão de Crédito</option>
-            <option value="Cartão de Débito">Cartão de Débito</option>
+            <option value="Cartão de crédito">Cartão de crédito</option>
+            <option value="Cartão de débito">Cartão de débito</option>
           </select>
         </label>
-        <label htmlFor="tag-input">
+        <label htmlFor="tag">
           Tag:
           <select
+            id="tag"
             data-testid="tag-input"
-            id="tag-input"
             value={ tag }
             onChange={ this.handleChange }
           >
