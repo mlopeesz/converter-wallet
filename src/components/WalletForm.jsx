@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import apiAllCurrency from '../services/apiCurrency';
-import { getCurrency, wallet } from '../actions';
+import getCurrency from '../services/apiCurrency';
+import apiAllCurrency from '../services/apiAllCurrency';
+import { wallet } from '../actions';
 
 class WalletForm extends Component {
   constructor() {
