@@ -1,15 +1,96 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import apiAllCurrency from '../services/apiCurrency';
+import { getCurrency, wallet } from '../actions';
 
 class WalletForm extends Component {
+  constructor() {
+    super();
+    this.state = {
+      id: 0,
+      value: '0',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
+      description: '',
+      exchangeRates: [],
+    };
+
+    this.handleAddButton = this.handleAddButton.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.mount = this.mount.bind(this);
+  }
+
+  componentDidMount() {
+    this.mount();
+  }
+
+  async mount() {
+    const fetch = await apiAllCurrency();
+    this.setState({ exchangeRates: fetch });
+  }
+
+  handleChange({ target: { value, name } }) {
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  handleAddButton() {
+    const { setDispatch, setDispatchFetch } = this.props;
+    const { currency } = this.state;
+    setDispatch(this.state);
+    setDispatchFetch(currency);
+    this.setState((state) => ({ value: 0, id: state.id + 1 }));
+  }
+
   render() {
+    const { method, tag, currency, value, description } = this.state;
     return (
       <form>
-        <input data-testid="value-input" />
-        <input data-testid="description-input" />
-        <input data-testid="currency-input" />
+        <input
+          data-testid="value-input"
+          value={ value }
+          onChange={ this.handleChange }
+        />
+        <input
+          data-testid="description-input"
+          value={ description }
+          onChange={ this.handleChange }
+        />
+        <label htmlFor="currency">
+          Moeda:
+          <select
+            data-testid="currency-input"
+            id="currency"
+            value={ currency }
+            onChange={ this.handleChange }
+          >
+            <option data-testid="USD" value="USD">USD</option>
+            <option data-testid="CAD" value="CAD">CAD</option>
+            <option data-testid="EUR" value="EUR">EUR</option>
+            <option data-testid="GBP" value="GBP">GBP</option>
+            <option data-testid="ARS" value="ARS">ARS</option>
+            <option data-testid="BTC" value="BTC">BTC</option>
+            <option data-testid="LTC" value="LTC">LTC</option>
+            <option data-testid="JPY" value="JPY">JPY</option>
+            <option data-testid="CHF" value="CHF">CHF</option>
+            <option data-testid="AUD" value="AUD">AUD</option>
+            <option data-testid="CNY" value="CNY">CNY</option>
+            <option data-testid="ILS" value="ILS">ILS</option>
+            <option data-testid="ETH" value="ETH">ETH</option>
+            <option data-testid="XRP" value="XRP">XRP</option>
+          </select>
+        </label>
         <label htmlFor="method-input">
           Método de Pagamento:
-          <select id="method-input">
+          <select
+            data-testid="method-input"
+            id="method-input"
+            value={ method }
+            onChange={ this.handleChange }
+          >
             <option value="dinheiro">Dinheiro</option>
             <option value="cartão de crédito">Cartão de Crédito</option>
             <option value="cartão de débito">Cartão de Débito</option>
@@ -17,7 +98,12 @@ class WalletForm extends Component {
         </label>
         <label htmlFor="tag-input">
           Tag:
-          <select data-testid="tag-input" id="tag-input">
+          <select
+            data-testid="tag-input"
+            id="tag-input"
+            value={ tag }
+            onChange={ this.handleChange }
+          >
             <option value="alimentação">Alimentação</option>
             <option value="lazer">Lazer</option>
             <option value="trabalho">Trabalho</option>
@@ -25,10 +111,25 @@ class WalletForm extends Component {
             <option value="saúde">Saúde</option>
           </select>
         </label>
-        <button type="button">Adicionar despesa</button>
+        <button
+          type="button"
+          onClick={ () => this.handleAddButton() }
+        >
+          Adicionar despesa
+        </button>
       </form>
     );
   }
 }
 
-export default WalletForm;
+WalletForm.propTypes = {
+  setDispatch: PropTypes.func.isRequired,
+  setDispatchFetch: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  setDispatch: (value) => dispatch(wallet(value)),
+  setDispatchFetch: (value) => dispatch(getCurrency(value)),
+});
+
+export default connect(null, mapDispatchToProps)(WalletForm);
