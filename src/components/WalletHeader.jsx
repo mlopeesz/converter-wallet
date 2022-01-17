@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-class WalletHeader extends Component {
+class WalletHeader extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -10,42 +10,41 @@ class WalletHeader extends Component {
     };
   }
 
-  refreshTotal() {
+  handleTotal() {
     const { expenses } = this.props;
-    const walletTotal = expenses.reduce((acc, { exchangeRates, currency, value }) => (
+    const total = expenses.reduce((acc, { exchangeRates, currency, value }) => (
       acc + (Number(exchangeRates[currency].ask) * Number(value))
     ), 0);
-    return walletTotal;
+    return total.toFixed(2);
   }
 
   render() {
-    const { userEmail } = this.props;
+    const { email } = this.props;
     const { currency } = this.state;
-
     return (
       <header>
-        <h4 data-testid="email-field">{ userEmail }</h4>
-        <h4>
-          Despesas totais:
-          <span data-testid="total-field">{ this.handleTotal }</span>
-        </h4>
-        <h4>
-          Câmbio:
-          <span data-testid="header-currency-field">{ currency }</span>
-        </h4>
+        <div className="email" data-testid="email-field">
+          {email}
+        </div>
+        <div data-testid="total-field">
+          { this.handleTotal() }
+          <div data-testid="header-currency-field">
+            { currency }
+          </div>
+        </div>
       </header>
     );
   }
 }
 
-WalletHeader.propTypes = {
-  userEmail: PropTypes.string.isRequired,
-  expenses: PropTypes.arrayOf(Object).isRequired,
-};
-
 const mapStateToProps = (state) => ({
-  userEmail: state.user.email,
+  email: state.user.email,
   expenses: state.wallet.expenses,
 });
 
-export default connect(mapStateToProps, null)(WalletHeader);
+WalletHeader.propTypes = {
+  email: PropTypes.string.isRequired,
+  expenses: PropTypes.arrayOf(Object).isRequired,
+};
+
+export default connect(mapStateToProps)(WalletHeader);

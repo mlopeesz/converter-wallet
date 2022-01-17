@@ -17,7 +17,7 @@ class WalletForm extends React.Component {
       exchangeRates: [],
     };
 
-    this.handleAddButton = this.handleAddButton.bind(this);
+    this.handleAddBtn = this.handleAddBtn.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.mount = this.mount.bind(this);
   }
@@ -31,7 +31,7 @@ class WalletForm extends React.Component {
     this.setState({ exchangeRates: fetch });
   }
 
-  handleAddButton() {
+  handleAddBtn() {
     const { setDispatch, setDispatchFetch } = this.props;
     const { currency } = this.state;
     setDispatch(this.state);
@@ -52,24 +52,24 @@ class WalletForm extends React.Component {
       <form>
         <input
           id="value"
+          value={ value }
           placeholder="Valor"
           data-testid="value-input"
-          value={ value }
           onChange={ this.handleChange }
         />
         <input
           id="description"
+          value={ description }
           placeholder="Descrição"
           data-testid="description-input"
-          value={ description }
           onChange={ this.handleChange }
         />
         <label htmlFor="currency">
           Moeda:
           <select
+            value={ currency }
             id="currency"
             data-testid="currency-input"
-            value={ currency }
             onChange={ this.handleChange }
           >
             <option data-testid="USD" value="USD">USD</option>
@@ -91,9 +91,9 @@ class WalletForm extends React.Component {
         <label htmlFor="method">
           Método De Pagamento:
           <select
+            value={ method }
             id="method"
             data-testid="method-input"
-            value={ method }
             onChange={ this.handleChange }
           >
             <option value="Dinheiro">Dinheiro</option>
@@ -104,9 +104,9 @@ class WalletForm extends React.Component {
         <label htmlFor="tag">
           Tag:
           <select
+            value={ tag }
             id="tag"
             data-testid="tag-input"
-            value={ tag }
             onChange={ this.handleChange }
           >
             <option value="Alimentação">Alimentação</option>
@@ -118,7 +118,7 @@ class WalletForm extends React.Component {
         </label>
         <button
           type="button"
-          onClick={ () => this.handleAddButton() }
+          onClick={ () => this.handleAddBtn() }
         >
           Adicionar despesa
         </button>
@@ -129,7 +129,7 @@ class WalletForm extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   setDispatch: (value) => dispatch(wallet(value)),
-  setDispatchFetch: (value) => dispatch(getCurrency(value)),
+  setDispatchFetch: (val) => dispatch(getCurrency(val)),
 });
 
 WalletForm.propTypes = {
