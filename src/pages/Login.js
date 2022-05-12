@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { loginEmail } from '../actions';
+import logo from '../assets/logo.png';
 
 class Login extends React.Component {
   constructor() {
@@ -33,7 +34,7 @@ class Login extends React.Component {
       email.includes('@')
       && email.includes('.com')
       && password.length >= MIN_PASSWORD_CHARACTERS
-    ) return false;
+    ) { return false; }
 
     return true;
   }
@@ -44,25 +45,34 @@ class Login extends React.Component {
     const { handleChange, validateFields } = this;
 
     return (
-      <div>
-        { logged && <Redirect to="/carteira" /> }
-        <input
-          type="email"
-          placeholder="E-mail"
-          data-testid="email-input"
-          name="email"
-          value={ email }
-          onChange={ handleChange }
-        />
-        <input
-          name="password"
-          placeholder="Senha"
-          type="password"
-          data-testid="password-input"
-          value={ password }
-          onChange={ handleChange }
-        />
+      <div
+        className="d-flex flex-column align-items-center justify-content-center
+        vh-100"
+      >
+        <img height="350" src={ logo } alt="logo" />
+        {logged && <Redirect to="/carteira" />}
+        <div>
+          <input
+            className="mb-3 form-control"
+            type="email"
+            placeholder="E-mail"
+            data-testid="email-input"
+            name="email"
+            value={ email }
+            onChange={ handleChange }
+          />
+          <input
+            className="form-control"
+            name="password"
+            placeholder="Senha"
+            type="password"
+            data-testid="password-input"
+            value={ password }
+            onChange={ handleChange }
+          />
+        </div>
         <button
+          className="btn btn-primary mt-4"
           type="submit"
           disabled={ validateFields() }
           onClick={ (event) => {
