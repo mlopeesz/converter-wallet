@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-max-depth */
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -49,79 +50,100 @@ class WalletForm extends React.Component {
   render() {
     const { method, tag, currency, value, description } = this.state;
     return (
-      <form>
-        <input
-          id="value"
-          value={ value }
-          placeholder="Valor"
-          data-testid="value-input"
-          onChange={ this.handleChange }
-        />
-        <input
-          id="description"
-          value={ description }
-          placeholder="Descrição"
-          data-testid="description-input"
-          onChange={ this.handleChange }
-        />
-        <label htmlFor="currency">
-          Moeda:
-          <select
-            value={ currency }
-            id="currency"
-            data-testid="currency-input"
-            onChange={ this.handleChange }
+      <form className="m-3">
+        <div className="row g-3 m-2">
+          <div className="col-sm-3">
+            Descrição:
+            <input
+              id="description"
+              value={ description }
+              data-testid="description-input"
+              onChange={ this.handleChange }
+              className="form-control"
+            />
+          </div>
+          <div className="col-sm">
+            Valor:
+            <input
+              id="value"
+              value={ value }
+              placeholder="Valor"
+              data-testid="value-input"
+              onChange={ this.handleChange }
+              className="form-control"
+            />
+          </div>
+          <div className="col-sm form-floating">
+            <label htmlFor="currency" className="">
+              Moeda:
+              <select
+                value={ currency }
+                id="currency"
+                data-testid="currency-input"
+                onChange={ this.handleChange }
+                className="form-control"
+              >
+                <option data-testid="USD" value="USD">USD</option>
+                <option data-testid="CAD" value="CAD">CAD</option>
+                <option data-testid="EUR" value="EUR">EUR</option>
+                <option data-testid="GBP" value="GBP">GBP</option>
+                <option data-testid="ARS" value="ARS">ARS</option>
+                <option data-testid="BTC" value="BTC">BTC</option>
+                <option data-testid="LTC" value="LTC">LTC</option>
+                <option data-testid="JPY" value="JPY">JPY</option>
+                <option data-testid="CHF" value="CHF">CHF</option>
+                <option data-testid="AUD" value="AUD">AUD</option>
+                <option data-testid="CNY" value="CNY">CNY</option>
+                <option data-testid="ILS" value="ILS">ILS</option>
+                <option data-testid="ETH" value="ETH">ETH</option>
+                <option data-testid="XRP" value="XRP">XRP</option>
+              </select>
+            </label>
+          </div>
+          <div className="col-sm form-floating">
+            <label htmlFor="method">
+              Pagamento:
+              <select
+                value={ method }
+                id="method"
+                data-testid="method-input"
+                onChange={ this.handleChange }
+                className="form-control"
+              >
+                <option value="Dinheiro">Dinheiro</option>
+                <option value="Cartão de crédito">Cartão de crédito</option>
+                <option value="Cartão de débito">Cartão de débito</option>
+              </select>
+            </label>
+          </div>
+          <div className="col-sm form-floating">
+            <label htmlFor="tag">
+              Tag:
+              <select
+                value={ tag }
+                id="tag"
+                data-testid="tag-input"
+                onChange={ this.handleChange }
+                className="form-control"
+              >
+                <option value="Alimentação">Alimentação</option>
+                <option value="Lazer">Lazer</option>
+                <option value="Trabalho">Trabalho</option>
+                <option value="Transporte">Transporte</option>
+                <option value="Saúde">Saúde</option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <div className="d-flex justify-content-center">
+          <button
+            type="button"
+            onClick={ () => this.handleAddBtn() }
+            className="btn btn-primary"
           >
-            <option data-testid="USD" value="USD">USD</option>
-            <option data-testid="CAD" value="CAD">CAD</option>
-            <option data-testid="EUR" value="EUR">EUR</option>
-            <option data-testid="GBP" value="GBP">GBP</option>
-            <option data-testid="ARS" value="ARS">ARS</option>
-            <option data-testid="BTC" value="BTC">BTC</option>
-            <option data-testid="LTC" value="LTC">LTC</option>
-            <option data-testid="JPY" value="JPY">JPY</option>
-            <option data-testid="CHF" value="CHF">CHF</option>
-            <option data-testid="AUD" value="AUD">AUD</option>
-            <option data-testid="CNY" value="CNY">CNY</option>
-            <option data-testid="ILS" value="ILS">ILS</option>
-            <option data-testid="ETH" value="ETH">ETH</option>
-            <option data-testid="XRP" value="XRP">XRP</option>
-          </select>
-        </label>
-        <label htmlFor="method">
-          Método De Pagamento:
-          <select
-            value={ method }
-            id="method"
-            data-testid="method-input"
-            onChange={ this.handleChange }
-          >
-            <option value="Dinheiro">Dinheiro</option>
-            <option value="Cartão de crédito">Cartão de crédito</option>
-            <option value="Cartão de débito">Cartão de débito</option>
-          </select>
-        </label>
-        <label htmlFor="tag">
-          Tag:
-          <select
-            value={ tag }
-            id="tag"
-            data-testid="tag-input"
-            onChange={ this.handleChange }
-          >
-            <option value="Alimentação">Alimentação</option>
-            <option value="Lazer">Lazer</option>
-            <option value="Trabalho">Trabalho</option>
-            <option value="Transporte">Transporte</option>
-            <option value="Saúde">Saúde</option>
-          </select>
-        </label>
-        <button
-          type="button"
-          onClick={ () => this.handleAddBtn() }
-        >
-          Adicionar despesa
-        </button>
+            Adicionar despesa
+          </button>
+        </div>
       </form>
     );
   }
