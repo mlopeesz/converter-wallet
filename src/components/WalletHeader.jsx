@@ -22,11 +22,14 @@ class WalletHeader extends React.Component {
     const { email } = this.props;
     const { currency } = this.state;
     return (
-      <header>
-        <div className="email" data-testid="email-field">
-          {email}
+      <header className="d-flex justify-content-around align-items-center bg-light mb-2">
+        <div className="email m-4 btn btn-secondary" data-testid="email-field">
+          { email }
         </div>
-        <div data-testid="total-field">
+        <div
+          data-testid="total-field alert     alert-success"
+          className="btn btn-success m-2"
+        >
           { this.handleTotal() }
           <div data-testid="header-currency-field">
             { currency }
