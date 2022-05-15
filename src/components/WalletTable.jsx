@@ -6,7 +6,7 @@ class WalletTable extends React.Component {
   render() {
     const { expenses } = this.props;
     return (
-      <table>
+      <table className="table">
         <thead>
           <tr>
             <th>Descrição</th>
@@ -20,7 +20,7 @@ class WalletTable extends React.Component {
             <th>Editar/Excluir</th>
           </tr>
         </thead>
-        <tbody className="tbody">
+        <tbody className="tbody table-light">
           {expenses.map(({
             id,
             value,
