@@ -3,9 +3,14 @@
 
 Neste projeto foi desenvolvido uma carteira de controle de gastos com conversor de moedas, ao utilizar essa aplicação um usuário deverá ser capaz de:
 
-- Adicionar, remover e editar um gasto;
+- Adicionar um gasto;
 - Visualizar uma tabelas com seus gastos;
 - Visualizar o total de gastos convertidos para uma moeda de escolha;
+---
+## Login
+![LoginGif](https://media.giphy.com/media/SMrYiuV8QJtF9sDlm3/giphy.gif)
+## Carteira
+![CarteiraGif](https://media.giphy.com/media/3jgLBqscsx7cK3HuD9/giphy.gif)
 
 ---
 ## Stacks
