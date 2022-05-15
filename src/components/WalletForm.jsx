@@ -52,7 +52,7 @@ class WalletForm extends React.Component {
     return (
       <form className="m-3">
         <div className="row g-3 m-2">
-          <div className="col-sm-3">
+          <div className="col">
             Descrição:
             <input
               id="description"
@@ -62,7 +62,7 @@ class WalletForm extends React.Component {
               className="form-control"
             />
           </div>
-          <div className="col-sm">
+          <div className="col">
             Valor:
             <input
               id="value"
@@ -73,8 +73,8 @@ class WalletForm extends React.Component {
               className="form-control"
             />
           </div>
-          <div className="col-sm form-floating">
-            <label htmlFor="currency" className="">
+          <div className="col">
+            <label htmlFor="currency">
               Moeda:
               <select
                 value={ currency }
@@ -100,7 +100,7 @@ class WalletForm extends React.Component {
               </select>
             </label>
           </div>
-          <div className="col-sm form-floating">
+          <div>
             <label htmlFor="method">
               Pagamento:
               <select
@@ -116,7 +116,7 @@ class WalletForm extends React.Component {
               </select>
             </label>
           </div>
-          <div className="col-sm form-floating">
+          <div className="col">
             <label htmlFor="tag">
               Tag:
               <select
